@@ -35,8 +35,12 @@ app.get("/api/notes", function(req, res) {
 
 // Post Notes (Check to see that .post is usable)
 app.post("/api/notes", function(req, res) {
-  // recieve new note and save to db.json
-  // return new db.json
+  // there needs to be something here that allows for the data coming in to be stringifyed
+  //                       V
+  // let data = JSON.stringify()
+  // when tested on postman the .post posts empty Obj and rewrites the whole thing
+  const write = fs.writeFileSync('./db/db.json', { encoding: 'utf8' })
+  res.json(write)
 });
 
 
