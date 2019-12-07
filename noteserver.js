@@ -4,6 +4,7 @@ var express = require("express");
 var path = require("path");
 var fs = require('fs');
 
+
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -35,15 +36,16 @@ app.get("/api/notes", function(req, res) {
 
 // Post Notes
 app.post("/api/notes", function(req, res) {
-  const activeNote = [{ "title": "Test Title2", "text": "Test text2", "id": "2" }]
-  var json = JSON.stringify(activeNote);
+  // works, but needs to accept the new content from field
+  const note = [{ "title": "Test Title3", "text": "Test text3", "id": "3" }]
+  var json = JSON.stringify(note);
   const write = fs.appendFileSync('./db/db.json', json ,{ encoding: 'utf8' })
 
   res.json(write)
 });
 
 
-// Delete Notes (Check to see that .delete is usable)
+// Delete Notes
 app.delete("/api/notes/:id", function(req, res) {
   
 // //  accept id number
