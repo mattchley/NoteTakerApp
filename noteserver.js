@@ -26,6 +26,10 @@ app.get("/notes", function(req, res) {
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
+// app.get("*", function(req, res) {
+//   res.sendFile(path.join(__dirname, "./public/index.html"));
+// });
+
 // API Calls
 // =============================================================
 // Get Notes
@@ -37,10 +41,25 @@ app.get("/api/notes", function(req, res) {
 // Post Notes
 app.post("/api/notes", function(req, res) {
   // works, but needs to accept the new content from field
-  // var json = JSON.stringify(note);
-  const write = fs.appendFileSync('./db/db.json',{ encoding: 'utf8' })
 
-  res.json(write)
+  
+
+  var note = req.body;
+  var notes = fs.readFile('./db/db.json', function (err){
+    if (err) throw err
+    let parsedNotes;
+    // If notes isn't an array or can't be turned into one, send back a new empty array
+    try {
+      parsedNotes = [].concat(JSON.parse(notes));
+    } catch (err) {
+      parsedNotes = [];
+    }
+    parsedNotes.push(note)
+    fs.writeFile('./db/db.json', JSON.stringify(parsedNotes), function (err){
+      if (err) throw err
+      res.json(note)
+    })
+  });
 });
 
 
