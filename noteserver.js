@@ -33,23 +33,27 @@ app.get("/api/notes", function(req, res) {
   res.json(read)
 });
 
-// Post Notes (Check to see that .post is usable)
+// Post Notes
 app.post("/api/notes", function(req, res) {
-  // there needs to be something here that allows for the data coming in to be stringifyed
-  //                       V
-  // let data = JSON.stringify()
-  // when tested on postman the .post posts empty Obj and rewrites the whole thing
-  const write = fs.writeFileSync('./db/db.json', { encoding: 'utf8' })
+  const activeNote = [{ "title": "Test Title2", "text": "Test text2", "id": "2" }]
+  var json = JSON.stringify(activeNote);
+  const write = fs.writeFileSync('./db/db.json', json ,{ encoding: 'utf8' })
+
   res.json(write)
 });
 
 
 // Delete Notes (Check to see that .delete is usable)
 app.delete("/api/notes/:id", function(req, res) {
-//  accept id number
-// read for id number
-// remove with specified id
-// rewrite them to db.json
+  
+// //  accept id number
+// var chosen = req.params.id;
+// // read for id number
+// const readID = fs.readFileSync('./db/db.json', { encoding: 'utf8' });
+// // remove with specified id
+// return res.json()
+// // rewrite them to db.json
+// return res.json(false);
 });
 
 
@@ -61,17 +65,9 @@ app.listen(PORT, function() {
 // =============================================================
 
 
-// Create New Notes Template^
-app.post("/api/characters", function(req, res) {
-  // req.body hosts is equal to the JSON post sent from the user
-  // This works because of our body parsing middleware
-  var newcharacter = req.body;
+//Next steps
+// connect the index.js functionality to the html
+  // it appears that there arent some elements for the JS to connect to on the html
 
-  console.log(newcharacter);
-
-  // We then add the json the user sent to the character array
-  characters.push(newcharacter);
-
-  // We then display the JSON to the users
-  res.json(newcharacter);
-});
+// with ID templating on db.json
+[{"title":"Test Title","text":"Test text", "id":"1"}]
