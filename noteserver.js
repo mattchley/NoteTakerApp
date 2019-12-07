@@ -37,7 +37,7 @@ app.get("/api/notes", function(req, res) {
 app.post("/api/notes", function(req, res) {
   const activeNote = [{ "title": "Test Title2", "text": "Test text2", "id": "2" }]
   var json = JSON.stringify(activeNote);
-  const write = fs.writeFileSync('./db/db.json', json ,{ encoding: 'utf8' })
+  const write = fs.appendFileSync('./db/db.json', json ,{ encoding: 'utf8' })
 
   res.json(write)
 });
