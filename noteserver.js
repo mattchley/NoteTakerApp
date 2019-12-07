@@ -37,9 +37,8 @@ app.get("/api/notes", function(req, res) {
 // Post Notes
 app.post("/api/notes", function(req, res) {
   // works, but needs to accept the new content from field
-  const note = [{ "title": "Test Title3", "text": "Test text3", "id": "3" }]
-  var json = JSON.stringify(note);
-  const write = fs.appendFileSync('./db/db.json', json ,{ encoding: 'utf8' })
+  // var json = JSON.stringify(note);
+  const write = fs.appendFileSync('./db/db.json',{ encoding: 'utf8' })
 
   res.json(write)
 });
